@@ -33,6 +33,7 @@ for path in filepaths:
 	pdf.cell(w=30, h=8, text=columns[2], border=1)
 	pdf.cell(w=25, h=8, text=columns[3],border=1)
 	pdf.cell(w=20, h=8, text=columns[4], border=1, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+	total_due_amount = 0
 	for index, row in df.iterrows():
 		pdf.set_font('Times', size=10)
 		pdf.set_text_color(80,80,80)
@@ -42,6 +43,20 @@ for path in filepaths:
 		pdf.cell(w= 25, h=8, text = str(row["price_per_unit"]), border=1)
 		pdf.cell(w= 20, h=8, text = str(row["total_price"]), border=1, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
+	total_due_amount = df["total_price"].sum()
+	pdf.set_font('Times', size=10)
+	pdf.set_text_color(80,80,80)
+	pdf.cell(w= 20, h=8, text = "", border=1)
+	pdf.cell(w= 80, h=8, text = "", border=1)
+	pdf.cell(w= 30, h=8, text = "", border=1)
+	pdf.cell(w= 25, h=8, text = "", border=1)
+	pdf.cell(w= 20, h=8, text = str(total_due_amount), border=1, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
+	pdf.set_font('Times', size=16, style = 'B')
+	pdf.cell(w=30, h=8, text = f'The total due amount is {total_due_amount} Euros.', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+
+	pdf.set_font('Times', size=14, style = 'B')
+	pdf.cell(w=25, h=8, text = "PythonHow")
+	pdf.image("pythonhow.png", w=10)
 	pdf.output(f"PDFs/{filename}.pdf")
 
