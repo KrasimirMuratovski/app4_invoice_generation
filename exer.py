@@ -4,8 +4,6 @@ import glob
 
 
 
-
-
 filepaths = glob.glob("Text-Files/*.txt")
 pdf = FPDF(orientation='P', unit='mm', format='A4')
 for filepath in filepaths:
